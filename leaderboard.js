@@ -12,28 +12,43 @@ PlayersList = new Mongo.Collection('players')
 // PlayersList.insert({ name: "John", score: 0 })
 
 if(Meteor.isClient){
-    console.log("Hello client");
+  console.log("Hello client");
 
-    // old way of doing stuff
-    Template.leaderboard.helpers({
-      'player': function() {
-        return PlayersList.find()
-      },
-      'numberOfPlayers': function() {
-        return PlayersList.find().count();
-      },
-      'goodmorning': function() {
-        return 'GOOD MORNING'
-      }
-    })
+  // old way of doing stuff
+  Template.leaderboard.helpers({
+    'player': function() {
+      return PlayersList.find()
+    },
+    'numberOfPlayers': function() {
+      return PlayersList.find().count();
+    },
+    'goodmorning': function() {
+      return 'GOOD MORNING'
+    },
+    'selectedClass': function() {
+      var playedId = this._id
+      var selectedPlayer = Session.get('selectedPlayer')
+      if (playedId === selectedPlayer)
+        return "selected"
+      else
+        return ""
+    }
+  })
 
-    Template.leaderboard.events({
-      'click .player': function() {
-        alert("You clicked an information about player")
-      }
-    })
+  Template.leaderboard.events({
+    'click .player': function() {
+      // where this binding occurs?
+      var playedId = this._id;
+      // sessions allow us to store small pieces of data
+      // that is not saved to the db
+      Session.set('selectedPlayer', playedId)
+    }
+  })
 }
 
+
+
+
 if(Meteor.isServer){
-    console.log("Hello server");
+  console.log("Hello server");
 }
