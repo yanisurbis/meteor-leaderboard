@@ -20,10 +20,16 @@ if(Meteor.isClient){
         return PlayersList.find()
       },
       'numberOfPlayers': function() {
-        return PlayersList.find().count()
+        return PlayersList.find().count();
       },
       'goodmorning': function() {
         return 'GOOD MORNING'
+      }
+    })
+
+    Template.leaderboard.events({
+      'click': function() {
+        console.log("You clicked something")
       }
     })
 }
