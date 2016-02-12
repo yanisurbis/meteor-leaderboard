@@ -9,6 +9,7 @@ PlayersList = new Mongo.Collection('players')
 // PlayersList.find().fetch()
 // PlayersList.find({ name: "John" })
 // PlayersList.find().count()
+// PlayersList.insert({ name: "John", score: 0 })
 
 if(Meteor.isClient){
     console.log("Hello client");
@@ -16,9 +17,12 @@ if(Meteor.isClient){
     // old way of doing stuff
     Template.leaderboard.helpers({
       'player': function() {
-        return 'Some other text'
+        return PlayersList.find()
       },
-      'otherHelperFunction': function() {
+      'numberOfPlayers': function() {
+        return PlayersList.find().count()
+      },
+      'goodmorning': function() {
         return 'GOOD MORNING'
       }
     })

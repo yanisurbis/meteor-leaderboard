@@ -8,6 +8,11 @@
 
 <!-- first template -->
 <template name="leaderboard">
-    {{player}}
-    {{otherHelperFunction}}
+    Number of Players: {{numberOfPlayers}}
+    <ul>
+      {{#each player}}
+        <li>{{name}}: {{score}}</li>
+      {{/each}}
+    </ul>
+    {{goodmorning}}
 </template>
