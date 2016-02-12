@@ -14,9 +14,14 @@ if(Meteor.isClient){
     console.log("Hello client");
 
     // old way of doing stuff
-    Template.leaderboard.player = function() {
-      return 'Some other text'
-    }
+    Template.leaderboard.helpers({
+      'player': function() {
+        return 'Some other text'
+      },
+      'otherHelperFunction': function() {
+        return 'GOOD MORNING'
+      }
+    })
 }
 
 if(Meteor.isServer){
