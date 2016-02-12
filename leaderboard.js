@@ -42,6 +42,14 @@ if(Meteor.isClient){
       // sessions allow us to store small pieces of data
       // that is not saved to the db
       Session.set('selectedPlayer', playedId)
+    },
+    'click .increment': function() {
+      var selectedPlayer = Session.get('selectedPlayer')
+      PlayersList.update(selectedPlayer, {$inc: {score: 5} })
+    },
+    'click .decrement': function(){
+      var selectedPlayer = Session.get('selectedPlayer');
+      PlayersList.update(selectedPlayer, {$inc: {score: -5} });
     }
   })
 }
