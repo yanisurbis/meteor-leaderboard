@@ -28,8 +28,8 @@ if(Meteor.isClient){
     })
 
     Template.leaderboard.events({
-      'click': function() {
-        console.log("You clicked something")
+      'click .player': function() {
+        alert("You clicked an information about player")
       }
     })
 }
