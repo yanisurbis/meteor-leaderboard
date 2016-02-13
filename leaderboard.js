@@ -54,6 +54,15 @@ if(Meteor.isClient){
     'click .decrement': function() {
       var selectedPlayer = Session.get('selectedPlayer');
       PlayersList.update(selectedPlayer, {$inc: {score: -5} });
+    },
+    'click .remove': function() {
+      var question = "Do you really want to delete player?";
+      var remove = confirm(question);
+
+      if (remove) {
+        var selectedPlayer = Session.get('selectedPlayer')
+        PlayersList.remove(selectedPlayer)
+      }
     }
   })
 
@@ -65,10 +74,12 @@ if(Meteor.isClient){
       // alternative is 'return false'
       // learn more about DOM in JS
       var playerNameVar = event.target.playerName.value
+      var playerScoreVar = event.target.playerScore.value
+      event.target.playerScore.value = ""
       event.target.playerName.value = ""
       PlayersList.insert({
         name: playerNameVar,
-        score: 0
+        score: playerScoreVar
       })
     }
   });
