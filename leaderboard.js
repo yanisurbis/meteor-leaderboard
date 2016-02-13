@@ -12,6 +12,8 @@ PlayersList = new Mongo.Collection('players')
 // PlayersList.insert({ name: "John", score: 0 })
 
 if(Meteor.isClient){
+  Meteor.subscribe('thePlayers')
+
   console.log("Hello client");
 
   // old way of doing stuff
@@ -102,4 +104,8 @@ if(Meteor.isClient){
 
 if(Meteor.isServer){
   console.log("Hello server");
+
+  Meteor.publish('thePlayers', function(){
+    return PlayersList.find()
+  })
 }
