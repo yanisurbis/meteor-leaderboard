@@ -2,8 +2,9 @@
     <title>Leaderboard</title>
 </head>
 <body>
-    <h1>Leaderboard</h1>
-    {{> leaderboard}}
+  {> loginButtons}
+  <h1>Leaderboard</h1>
+  {{> leaderboard}}
 </body>
 
 <!-- first template -->
@@ -29,9 +30,12 @@
 
 <!-- second template for adding players to our board -->
 <template name="addPlayerForm">
-  <form>
-    <input type="text" name="playerName" value="">
-    <input type="text" name="playerScore" value="">
-    <input type="submit" name="" value="Add Player">
-  </form>
+  // Logged-in Status
+  {{#if currentUser}}
+    <form>
+      <input type="text" name="playerName" value="">
+      <input type="text" name="playerScore" value="">
+      <input type="submit" name="" value="Add Player">
+    </form>
+  {{/if}}
 </template>
