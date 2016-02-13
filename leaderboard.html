@@ -2,7 +2,7 @@
     <title>Leaderboard</title>
 </head>
 <body>
-  {> loginButtons}
+  {{> loginButtons}}
   <h1>Leaderboard</h1>
   {{> leaderboard}}
 </body>
@@ -30,7 +30,7 @@
 
 <!-- second template for adding players to our board -->
 <template name="addPlayerForm">
-  // Logged-in Status
+  <!-- Logged-in Status -->
   {{#if currentUser}}
     <form>
       <input type="text" name="playerName" value="">
