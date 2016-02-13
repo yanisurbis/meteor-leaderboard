@@ -32,6 +32,10 @@ if(Meteor.isClient){
         return "selected"
       else
         return ""
+    },
+    'showSelectedPlayer': function() {
+      var selectedPlayer = Session.get('selectedPlayer')
+      return PlayersList.findOne(selectedPlayer)
     }
   })
 
@@ -47,11 +51,27 @@ if(Meteor.isClient){
       var selectedPlayer = Session.get('selectedPlayer')
       PlayersList.update(selectedPlayer, {$inc: {score: 5} })
     },
-    'click .decrement': function(){
+    'click .decrement': function() {
       var selectedPlayer = Session.get('selectedPlayer');
       PlayersList.update(selectedPlayer, {$inc: {score: -5} });
     }
   })
+
+  // working with events
+  Template.addPlayerForm.events({
+    // for both pressing 'return' and click event
+    'submit form': function(event) {
+      event.preventDefault()
+      // alternative is 'return false'
+      // learn more about DOM in JS
+      var playerNameVar = event.target.playerName.value
+      event.target.playerName.value = ""
+      PlayersList.insert({
+        name: playerNameVar,
+        score: 0
+      })
+    }
+  });
 }
 
 
