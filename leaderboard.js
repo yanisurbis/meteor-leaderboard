@@ -18,16 +18,8 @@ if(Meteor.isClient){
 
   // old way of doing stuff
   Template.leaderboard.helpers({
-    'player': function() {
-      var currentUserId = Meteor.userId()
-      return PlayersList.find({
-        createdBy: currentUserId
-      }, {
-        sort: {
-          score: -1,
-          name: 1
-        }
-      })
+    'player': function(){
+      return PlayersList.find({}, {sort: {score: 1, name: 1}});
     },
     'numberOfPlayers': function() {
       return PlayersList.find().count();
@@ -106,6 +98,7 @@ if(Meteor.isServer){
   console.log("Hello server");
 
   Meteor.publish('thePlayers', function(){
-    return PlayersList.find()
-  })
+    var currentUserId = this.userId;
+    return PlayersList.find({createdBy: currentUserId})
+  });
 }
